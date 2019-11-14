@@ -1,0 +1,14 @@
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f1f5f7"
+    >
+  <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/users_recycler_view"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:clipToPadding="false"
+      android:scrollbars="vertical"
+      />
+
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,188 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:ignore="NamespaceTypo"
+    >
+
+  <androidx.cardview.widget.CardView
+      android:id="@+id/card_view"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:layout_margin="@dimen/card_margin"
+      android:clickable="true"
+      android:elevation="3dp"
+      android:focusable="true"
+      android:foreground="?attr/selectableItemBackground"
+      card_view:cardCornerRadius="@dimen/card_album_radius"
+
+      >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        >
+
+      <LinearLayout
+          android:id="@+id/left_layout"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="5dp"
+          android:layout_marginTop="10dp"
+          android:layout_marginBottom="10dp"
+          android:layout_weight="1"
+          android:gravity="center_vertical"
+          android:orientation="vertical"
+          >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            >
+
+          <ImageView
+              android:id="@+id/upvotes_img"
+              android:layout_width="15dp"
+              android:layout_height="15dp"
+              android:src="@drawable/icon_upvotes"
+              />
+          <TextView
+              android:id="@+id/upvotes_text"
+              android:layout_width="wrap_content"
+              android:layout_height="20dp"
+              android:gravity="start"
+              android:hint="@string/zero"
+              android:minWidth="30dp"
+              android:paddingStart="5dp"
+              android:paddingEnd="2dp"
+              android:textColor="@color/light_text"
+              android:textSize="12sp"
+              />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            >
+
+
+          <ImageView
+              android:id="@+id/ans_img"
+              android:layout_width="15dp"
+              android:layout_height="15dp"
+              android:src="@drawable/icon_hash"
+              />
+          <TextView
+              android:id="@+id/ans_text"
+              android:layout_width="wrap_content"
+              android:layout_height="20dp"
+              android:gravity="start"
+              android:hint="@string/zero"
+              android:minWidth="30dp"
+              android:paddingStart="5dp"
+              android:paddingEnd="2dp"
+              android:textColor="@color/light_text"
+              android:textSize="12sp"
+              />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            >
+
+          <ImageView
+              android:id="@+id/views_img"
+              android:layout_width="15dp"
+              android:layout_height="15dp"
+              android:src="@drawable/icon_view"
+              />
+          <TextView
+              android:id="@+id/views_text"
+              android:layout_width="wrap_content"
+              android:layout_height="20dp"
+              android:gravity="start"
+              android:hint="@string/zero"
+              android:minWidth="30dp"
+              android:paddingStart="5dp"
+              android:paddingEnd="2dp"
+              android:textColor="@color/light_text"
+              android:textSize="12sp"
+              />
+        </LinearLayout>
+
+      </LinearLayout>
+
+
+      <RelativeLayout
+          android:id="@+id/right_layout"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="9"
+          >
+
+        <TextView
+            android:id="@+id/question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="40dp"
+            android:hint="@string/title_question"
+            android:paddingTop="10dp"
+            android:paddingEnd="5dp"
+            android:textColor="@color/grey"
+            android:textSize="15sp"
+            />
+
+        <com.hootsuite.nachos.NachoTextView
+            android:id="@+id/nacho_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:editable="false"
+            android:focusable="false"
+            android:maxWidth="100dp"
+            app:chipBackground="@color/colorAccent"
+            app:chipHeight="30dp"
+            app:chipHorizontalSpacing="2dp"
+            app:chipTextColor="@color/black"
+            app:chipTextSize="16dp"
+            app:chipVerticalSpacing="3dp"
+
+            />
+
+        <TextView
+            android:id="@+id/last_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="end"
+            android:hint="@string/title_users"
+            android:maxWidth="150dp"
+            android:minWidth="50dp"
+            android:textColor="@color/light_text"
+            android:textSize="12sp"
+            />
+
+      </RelativeLayout>
+    </LinearLayout>
+
+  </androidx.cardview.widget.CardView>
+
+</LinearLayout>

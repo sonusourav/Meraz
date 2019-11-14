@@ -1,3 +1,8 @@
 <resources>
-  <string name="app_name">MerazOverflow</string>
+  <string name="app_name">Meraz Overflow</string>
+  <string name="title_question">Question</string>
+  <string name="title_tags">Tags</string>
+  <string name="title_users">Users</string>
+  <string name="title_profile">Profile</string>
+  <string name="zero">0</string>
 </resources>
