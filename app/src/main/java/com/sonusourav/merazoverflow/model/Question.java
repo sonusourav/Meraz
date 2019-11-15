@@ -1,4 +1,4 @@
-package com.sonusourav.merazoverflow;
+package com.sonusourav.merazoverflow.model;
 
 import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;

@@ -1,20 +1,18 @@
 package com.sonusourav.merazoverflow.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.hootsuite.nachos.NachoTextView;
-import com.sonusourav.merazoverflow.Question;
 import com.sonusourav.merazoverflow.R;
+import com.sonusourav.merazoverflow.model.Question;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -25,6 +23,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
   private List<Question> questionList;
   private int mCurrentPosition;
   private boolean isLoading = false;
+  private boolean isLastPage = false;
 
   public QuestionAdapter(Context context, List<Question> questionList) {
     this.context = context;
@@ -36,11 +35,11 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     switch (viewType) {
       case VIEW_TYPE_ITEM:
         return new MyViewHolder(
-            LayoutInflater.from(parent.getContext())
+            LayoutInflater.from(context)
                 .inflate(R.layout.card_questions, parent, false));
       case VIEW_TYPE_LOADING:
         return new ProgressHolder(
-            LayoutInflater.from(parent.getContext()).inflate(R.layout.item_loading, parent, false));
+            LayoutInflater.from(context).inflate(R.layout.item_loading, parent, false));
       default:
         return null;
     }
@@ -67,15 +66,14 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
       String date = simpleDateFormat.format(question.getLastActivityDate());
       myViewHolder.lastActive.setText(date);
 
-      ArrayAdapter<String> adapter =
-          new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line,
-              question.getTags());
-      myViewHolder.nachoTextView.setAdapter(adapter);
+      // ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line,question.getTags());
+      //  myViewHolder.nachoTextView.setAdapter(adapter);
     }
   }
 
   public void addItems(List<Question> questions) {
-    questionList = new ArrayList<>(questions);
+    clear();
+    questionList.addAll(questions);
     notifyDataSetChanged();
   }
 
@@ -85,26 +83,34 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     notifyItemInserted(questionList.size() - 1);
   }
 
+  public boolean isLoading() {
+    return isLoading;
+  }
+
+  public boolean isLastPage() {
+    return isLastPage;
+  }
+
   public void removeLoading() {
-    int position = questionList.size() - 1;
-    Question question = getItem(position);
-    if (question != null) {
+    Log.d("questions", "remove loading" + getCurrentPosition());
+    int position = getCurrentPosition();
+    if (getItemViewType(position) == VIEW_TYPE_LOADING) {
       questionList.remove(position);
       notifyItemRemoved(position);
     }
     isLoading = false;
   }
 
-  public void clear() {
+  private void clear() {
     questionList.clear();
-    // notifyDataSetChanged();
+    notifyDataSetChanged();
   }
 
   private Question getItem(int position) {
     return questionList.get(position);
   }
 
-  public int getCurrentPosition() {
+  private int getCurrentPosition() {
     return mCurrentPosition;
   }
 
@@ -122,15 +128,10 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     return questionList == null ? 0 : questionList.size();
   }
 
-  public interface OnLoadMoreListener {
-    void onLoadMore();
-  }
-
   public class MyViewHolder extends RecyclerView.ViewHolder {
 
     TextView upVotes, answers, views, question, lastActive;
     NachoTextView nachoTextView;
-    SwipeRefreshLayout swipeRefreshLayout;
 
     MyViewHolder(View view) {
       super(view);
@@ -140,14 +141,12 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
       nachoTextView = view.findViewById(R.id.nacho_text_view);
       question = view.findViewById(R.id.question);
       lastActive = view.findViewById(R.id.last_activity);
-      swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
     }
   }
 
   public class ProgressHolder extends RecyclerView.ViewHolder {
 
     ProgressBar progressBar;
-    SwipeRefreshLayout swipeRefreshLayout;
 
     ProgressHolder(View itemView) {
       super(itemView);

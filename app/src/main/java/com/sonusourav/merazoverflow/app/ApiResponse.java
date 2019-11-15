@@ -1,7 +1,7 @@
 package com.sonusourav.merazoverflow.app;
 
 import com.google.gson.annotations.SerializedName;
-import com.sonusourav.merazoverflow.Question;
+import com.sonusourav.merazoverflow.model.Question;
 
 public class ApiResponse {
 

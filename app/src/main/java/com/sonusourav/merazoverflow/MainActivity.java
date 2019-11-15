@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView navigation = findViewById(R.id.navigation);
     navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-    // attaching bottom sheet behaviour - hide / show on scroll
     CoordinatorLayout.LayoutParams layoutParams =
         (CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
     layoutParams.setBehavior(new BottomNavigationBehavior());
@@ -70,11 +69,7 @@ public class MainActivity extends AppCompatActivity {
     loadFragment(new QuestionsFragment());
   }
 
-  /**
-   * loading fragment into FrameLayout
-   */
   private void loadFragment(Fragment fragment) {
-    // load fragment
     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
     transaction.replace(R.id.frame_container, fragment);
     transaction.addToBackStack(null);

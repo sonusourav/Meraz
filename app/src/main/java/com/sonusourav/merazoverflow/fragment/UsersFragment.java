@@ -6,8 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
-import com.sonusourav.merazoverflow.Question;
 import com.sonusourav.merazoverflow.R;
+import com.sonusourav.merazoverflow.model.Question;
 import java.util.List;
 
 public class UsersFragment extends Fragment {
