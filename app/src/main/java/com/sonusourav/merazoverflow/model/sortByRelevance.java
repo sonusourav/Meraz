@@ -4,6 +4,6 @@ import java.util.Comparator;
 
 public class sortByRelevance implements Comparator<Question> {
   public int compare(Question a, Question b) {
-    return a.getViewCount() - b.getViewCount();
+    return a.getScore() - b.getScore();
   }
 }

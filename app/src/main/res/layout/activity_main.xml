@@ -18,9 +18,7 @@
       android:background="#E0DEDE"
       android:focusable="false"
       app:queryHint="Search Questions...."
-      />
-
-
+      ></androidx.appcompat.widget.SearchView>
 
   <FrameLayout
       android:id="@+id/frame_container"

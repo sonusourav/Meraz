@@ -133,6 +133,7 @@
           android:layout_height="wrap_content"
           android:layout_weight="9"
           android:layout_marginStart="5dp"
+          android:paddingBottom="5dp"
           >
 
         <TextView
@@ -140,7 +141,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="10dp"
             android:hint="@string/title_question"
             android:paddingTop="10dp"
             android:paddingEnd="5dp"
@@ -148,36 +149,34 @@
             android:textSize="15sp"
             />
 
-        <com.hootsuite.nachos.NachoTextView
-            android:id="@+id/nacho_text_view"
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/tag_view"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:layout_alignParentBottom="true"
-            android:focusable="false"
-            android:maxWidth="100dp"
-            app:chipBackground="@color/colorAccent"
-            app:chipHeight="30dp"
-            app:chipHorizontalSpacing="2dp"
-            app:chipTextColor="@color/black"
-            app:chipTextSize="16dp"
-            app:chipVerticalSpacing="3dp"
-
+            android:layout_below="@id/question"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="5dp"
+            android:layout_toStartOf="@id/user_name"
+            android:backgroundTint="@color/colorPrimary"
+            android:enabled="false"
+            android:maxWidth="60dp"
+            android:theme="@style/ThinnerChip"
             />
 
         <TextView
-            android:id="@+id/last_activity"
+            android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="5dp"
             android:gravity="end"
             android:hint="@string/title_users"
             android:maxWidth="150dp"
-            android:minWidth="50dp"
-            android:textColor="@color/light_text"
+            android:minWidth="100dp"
+            android:textColor="@drawable/text_view_color"
             android:textSize="12sp"
             />
 

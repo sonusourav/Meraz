@@ -19,4 +19,20 @@ public class Owner implements Serializable {
   private String ImageUrl;
   @SerializedName("link")
   private String userIdlink;
+
+  public String getImageUrl() {
+    return ImageUrl;
+  }
+
+  public long getUserId() {
+    return userId;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public String getUserIdlink() {
+    return userIdlink;
+  }
 }

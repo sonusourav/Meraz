@@ -7,14 +7,9 @@
       android:title="@string/title_question" />
 
   <item
-      android:id="@+id/navigation_tags"
-      android:icon="@drawable/icons_tag"
-      android:title="@string/title_tags" />
-
-  <item
       android:id="@+id/navigation_users"
-      android:icon="@drawable/icons_user"
-      android:title="@string/title_users" />
+      android:icon="@drawable/icon_camera"
+      android:title="@string/title_camera" />
 
   <item
       android:id="@+id/navigation_profile"

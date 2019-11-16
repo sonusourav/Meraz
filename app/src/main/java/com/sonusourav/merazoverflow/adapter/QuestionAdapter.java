@@ -1,6 +1,7 @@
 package com.sonusourav.merazoverflow.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,13 +10,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-import com.hootsuite.nachos.NachoTextView;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
+import com.sonusourav.merazoverflow.QuestionDetails;
 import com.sonusourav.merazoverflow.R;
 import com.sonusourav.merazoverflow.model.Question;
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Locale;
 
 public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
   private final int VIEW_TYPE_ITEM = 0;
@@ -62,11 +64,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
       myViewHolder.views.setText(Integer.toString(question.getViewCount()));
       myViewHolder.answers.setText(Integer.toString(question.getAnswerCount()));
       myViewHolder.question.setText(question.getTitle());
-
-      String pattern = "MM-dd-yyyy";
-      SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, Locale.ENGLISH);
-      String date = simpleDateFormat.format(question.getCreationDate());
-      myViewHolder.lastActive.setText(date);
+      myViewHolder.userName.setText(question.getOwner().getName());
+      myViewHolder.userName.setTextColor(context.getResources().getColor(R.color.sky_blue));
 
       if (question.isIsAnswered()) {
         myViewHolder.leftLayout.setBackgroundColor(
@@ -76,8 +75,27 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             context.getResources().getColor(R.color.color_unanswered));
       }
 
-      // ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line,question.getTags());
-      //  myViewHolder.nachoTextView.setAdapter(adapter);
+      myViewHolder.question.setOnClickListener(new View.OnClickListener() {
+        @Override public void onClick(View v) {
+          Intent intent = new Intent(context, QuestionDetails.class);
+          intent.putExtra("url", question.getLink());
+          context.startActivity(intent);
+        }
+      });
+
+      myViewHolder.userName.setOnClickListener(new View.OnClickListener() {
+        @Override public void onClick(View v) {
+          Intent intent = new Intent(context, QuestionDetails.class);
+          intent.putExtra("url", question.getOwner().getUserIdlink());
+          context.startActivity(intent);
+        }
+      });
+
+      for (int i = 0; i < 2; i++) {
+        Chip tag = new Chip(context);
+        tag.setText(question.getTags()[i]);
+        myViewHolder.tagView.addView(tag);
+      }
     }
   }
 
@@ -147,21 +165,23 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
   public class MyViewHolder extends RecyclerView.ViewHolder {
 
-    TextView upVotes, answers, views, question, lastActive;
-    NachoTextView nachoTextView;
+    TextView upVotes, answers, views, question, userName;
+    ChipGroup tagView;
     SearchView searchView;
     LinearLayout leftLayout;
+    CardView cardView;
 
     MyViewHolder(View view) {
       super(view);
       upVotes = view.findViewById(R.id.upvotes_text);
       answers = view.findViewById(R.id.ans_text);
       views = view.findViewById(R.id.views_text);
-      nachoTextView = view.findViewById(R.id.nacho_text_view);
+      tagView = view.findViewById(R.id.tag_view);
       question = view.findViewById(R.id.question);
-      lastActive = view.findViewById(R.id.last_activity);
+      userName = view.findViewById(R.id.user_name);
       searchView = view.findViewById(R.id.search_view);
       leftLayout = view.findViewById(R.id.left_layout);
+      cardView = view.findViewById(R.id.card_view);
     }
   }
 

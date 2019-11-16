@@ -30,6 +30,13 @@
           android:name="android.app.searchable"
           android:resource="@xml/searchable" />
     </activity>
+    <activity
+        android:name=".QuestionDetails"
+        android:label="MerazOverflow">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".MainActivity" />
+    </activity>
   </application>
 
 </manifest>

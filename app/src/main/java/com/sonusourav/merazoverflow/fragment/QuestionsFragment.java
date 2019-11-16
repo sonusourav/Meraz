@@ -46,7 +46,6 @@ public class QuestionsFragment extends Fragment {
   private int pageNo = 1;
   private ApiInterface apiService;
   private androidx.appcompat.widget.SearchView searchView;
-  private List<Question> tempQuestionList = null;
   private int[] sortOrder = new int[] { 1, 1, 1, 1 };
   private TextView sortActivity, sortRelevance, sortVotes, sortCreation;
   private StringBuilder lastQuestion = new StringBuilder();
@@ -124,9 +123,6 @@ public class QuestionsFragment extends Fragment {
       @Override public boolean onQueryTextSubmit(String query) {
         if (questionAdapter.isSearchEnabled()) {
           questionAdapter.setSearchEnabled(false);
-          if (questionsList.size() > 0) {
-            tempQuestionList = questionsList.subList(0, questionsList.size() - 1);
-          }
           questionAdapter.clear();
           questionAdapter.addLoading();
           searchQuestion(query);

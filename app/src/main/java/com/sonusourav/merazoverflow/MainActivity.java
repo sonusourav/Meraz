@@ -23,7 +23,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.sonusourav.merazoverflow.fragment.ProfileFragment;
 import com.sonusourav.merazoverflow.fragment.QuestionsFragment;
-import com.sonusourav.merazoverflow.fragment.TagsFragment;
 import com.sonusourav.merazoverflow.fragment.UsersFragment;
 import com.sonusourav.merazoverflow.helper.BottomNavigationBehavior;
 
@@ -47,11 +46,6 @@ public class MainActivity extends AppCompatActivity {
         case R.id.navigation_question:
           toolbar.setTitle("Question");
           fragment = new QuestionsFragment();
-          loadFragment(fragment);
-          return true;
-        case R.id.navigation_tags:
-          toolbar.setTitle("Tags");
-          fragment = new TagsFragment();
           loadFragment(fragment);
           return true;
         case R.id.navigation_users:
@@ -92,9 +86,9 @@ public class MainActivity extends AppCompatActivity {
 
     toolbar.setTitle("Questions");
 
-    if (!checkPermission())
+    if (!checkPermission()) {
       loadFragment(new QuestionsFragment());
-    else {
+    } else {
       requestPermission();
     }
   }
@@ -111,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
         QuestionsFragment fragment = new QuestionsFragment(bundle);
         loadFragment(fragment);
       }
+
     }
   }
 
@@ -120,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
     transaction.addToBackStack(null);
     transaction.commit();
   }
+
 
   private boolean checkPermission() {
     int result1 = ContextCompat.checkSelfPermission(getApplicationContext(), RECORD_AUDIO);
@@ -133,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
 
     ActivityCompat.requestPermissions(this, new String[] { RECORD_AUDIO, CAMERA },
         PERMISSION_REQUEST_CODE);
+
   }
 
   @Override
@@ -144,12 +141,12 @@ public class MainActivity extends AppCompatActivity {
         boolean audioAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
         boolean cameraAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
 
-        if (audioAccepted && cameraAccepted) {
+        if (audioAccepted && cameraAccepted)
           Snackbar.make(coordinatorLayout, "Permission granted for voice and image search",
               Snackbar.LENGTH_LONG).show();
-        } else {
+        else {
 
-          Snackbar.make(coordinatorLayout, "Permission Denied",
+          Snackbar.make(coordinatorLayout, "Permission Denied. You cannot access mic",
               Snackbar.LENGTH_LONG).show();
 
           if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
