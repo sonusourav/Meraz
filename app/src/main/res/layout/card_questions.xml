@@ -142,7 +142,7 @@
             android:hint="@string/title_question"
             android:paddingTop="10dp"
             android:paddingEnd="5dp"
-            android:textColor="@color/grey"
+            android:textColor="@color/grey_200"
             android:textSize="15sp"
             />
 

@@ -1,9 +1,10 @@
-package com.sonusourav.merazoverflow.app;
+package com.sonusourav.merazoverflow.api;
 
 import com.google.gson.annotations.SerializedName;
 import com.sonusourav.merazoverflow.model.Question;
+import java.io.Serializable;
 
-public class ApiResponse {
+public class ApiResponse implements Serializable {
 
   @SerializedName("items")
   private Question[] questions;

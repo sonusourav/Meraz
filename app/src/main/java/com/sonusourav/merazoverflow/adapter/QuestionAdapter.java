@@ -1,13 +1,13 @@
 package com.sonusourav.merazoverflow.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.hootsuite.nachos.NachoTextView;
 import com.sonusourav.merazoverflow.R;
@@ -24,6 +24,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
   private int mCurrentPosition;
   private boolean isLoading = false;
   private boolean isLastPage = false;
+  private boolean isSearchEnabled = true;
 
   public QuestionAdapter(Context context, List<Question> questionList) {
     this.context = context;
@@ -63,7 +64,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
       String pattern = "MM-dd-yyyy";
       SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, Locale.ENGLISH);
-      String date = simpleDateFormat.format(question.getLastActivityDate());
+      String date = simpleDateFormat.format(question.getCreationDate());
       myViewHolder.lastActive.setText(date);
 
       // ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line,question.getTags());
@@ -87,12 +88,19 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     return isLoading;
   }
 
+  public boolean isSearchEnabled() {
+    return isSearchEnabled;
+  }
+
+  public void setSearchEnabled(boolean searchEnabled) {
+    isSearchEnabled = searchEnabled;
+  }
+
   public boolean isLastPage() {
     return isLastPage;
   }
 
   public void removeLoading() {
-    Log.d("questions", "remove loading" + getCurrentPosition());
     int position = getCurrentPosition();
     if (getItemViewType(position) == VIEW_TYPE_LOADING) {
       questionList.remove(position);
@@ -101,7 +109,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     isLoading = false;
   }
 
-  private void clear() {
+  public void clear() {
     questionList.clear();
     notifyDataSetChanged();
   }
@@ -132,6 +140,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     TextView upVotes, answers, views, question, lastActive;
     NachoTextView nachoTextView;
+    SearchView searchView;
 
     MyViewHolder(View view) {
       super(view);
@@ -141,6 +150,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
       nachoTextView = view.findViewById(R.id.nacho_text_view);
       question = view.findViewById(R.id.question);
       lastActive = view.findViewById(R.id.last_activity);
+      searchView = view.findViewById(R.id.search_view);
     }
   }
 

@@ -9,7 +9,7 @@
     >
 
   <androidx.appcompat.widget.SearchView
-      android:id="@+id/search"
+      android:id="@+id/search_view"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginStart="5dp"
@@ -21,21 +21,13 @@
       app:voiceIcon="@drawable/icons_mic"
       />
 
-  <TextView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="60dp"
-      android:gravity="center"
-      android:text="Questions"
-      android:textColor="#111"
-      android:textSize="16sp"
-      />
+
 
   <FrameLayout
       android:id="@+id/frame_container"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:layout_marginTop="90dp"
+      android:layout_marginTop="60dp"
       app:layout_behavior="@string/appbar_scrolling_view_behavior"
       />
 

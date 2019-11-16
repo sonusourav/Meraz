@@ -1,4 +1,4 @@
-package com.sonusourav.merazoverflow.app;
+package com.sonusourav.merazoverflow.api;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
