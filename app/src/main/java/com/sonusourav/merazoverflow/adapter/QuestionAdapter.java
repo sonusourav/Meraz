@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -66,6 +67,14 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
       SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, Locale.ENGLISH);
       String date = simpleDateFormat.format(question.getCreationDate());
       myViewHolder.lastActive.setText(date);
+
+      if (question.isIsAnswered()) {
+        myViewHolder.leftLayout.setBackgroundColor(
+            context.getResources().getColor(R.color.color_answered));
+      } else {
+        myViewHolder.leftLayout.setBackgroundColor(
+            context.getResources().getColor(R.color.color_unanswered));
+      }
 
       // ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_dropdown_item_1line,question.getTags());
       //  myViewHolder.nachoTextView.setAdapter(adapter);
@@ -141,6 +150,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     TextView upVotes, answers, views, question, lastActive;
     NachoTextView nachoTextView;
     SearchView searchView;
+    LinearLayout leftLayout;
 
     MyViewHolder(View view) {
       super(view);
@@ -151,6 +161,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
       question = view.findViewById(R.id.question);
       lastActive = view.findViewById(R.id.last_activity);
       searchView = view.findViewById(R.id.search_view);
+      leftLayout = view.findViewById(R.id.left_layout);
     }
   }
 

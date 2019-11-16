@@ -32,10 +32,11 @@
       <LinearLayout
           android:id="@+id/left_layout"
           android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginStart="5dp"
-          android:layout_marginTop="10dp"
-          android:layout_marginBottom="10dp"
+          android:layout_height="match_parent"
+          android:paddingStart="5dp"
+          android:paddingTop="10dp"
+          android:paddingEnd="0dp"
+          android:paddingBottom="10dp"
           android:layout_weight="1"
           android:gravity="center_vertical"
           android:orientation="vertical"
@@ -60,10 +61,10 @@
               android:layout_height="20dp"
               android:gravity="start"
               android:hint="@string/zero"
-              android:minWidth="30dp"
+              android:minWidth="25dp"
               android:paddingStart="5dp"
               android:paddingEnd="2dp"
-              android:textColor="@color/light_text"
+              android:textColor="@color/white"
               android:textSize="12sp"
               />
         </LinearLayout>
@@ -88,10 +89,10 @@
               android:layout_height="20dp"
               android:gravity="start"
               android:hint="@string/zero"
-              android:minWidth="30dp"
+              android:minWidth="25dp"
               android:paddingStart="5dp"
               android:paddingEnd="2dp"
-              android:textColor="@color/light_text"
+              android:textColor="@color/white"
               android:textSize="12sp"
               />
         </LinearLayout>
@@ -115,10 +116,10 @@
               android:layout_height="20dp"
               android:gravity="start"
               android:hint="@string/zero"
-              android:minWidth="30dp"
+              android:minWidth="25dp"
               android:paddingStart="5dp"
               android:paddingEnd="2dp"
-              android:textColor="@color/light_text"
+              android:textColor="@color/white"
               android:textSize="12sp"
               />
         </LinearLayout>
@@ -131,6 +132,7 @@
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="9"
+          android:layout_marginStart="5dp"
           >
 
         <TextView
@@ -142,7 +144,7 @@
             android:hint="@string/title_question"
             android:paddingTop="10dp"
             android:paddingEnd="5dp"
-            android:textColor="@color/grey_200"
+            android:textColor="@color/color_question"
             android:textSize="15sp"
             />
 
@@ -151,7 +153,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:editable="false"
             android:focusable="false"
             android:maxWidth="100dp"
             app:chipBackground="@color/colorAccent"

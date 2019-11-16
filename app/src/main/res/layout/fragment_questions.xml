@@ -10,64 +10,64 @@
       android:weightSum="8"
       >
     <TextView
-        android:id="@+id/sort_relevance"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="2.2"
         android:background="@drawable/text_lines"
+        android:id="@+id/sort_relevance"
         android:gravity="center"
-        android:paddingStart="0dp"
-        android:paddingTop="5dp"
         android:paddingEnd="0dp"
-        android:paddingBottom="5dp"
         android:text="Relevance"
+        android:paddingStart="0dp"
         android:textColor="@color/light_text"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:textSize="13sp"
         />
     <TextView
-        android:id="@+id/sort_activity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="2.1"
         android:background="@drawable/text_lines"
+        android:id="@+id/sort_activity"
         android:gravity="center"
         android:paddingStart="5dp"
+        android:text="Activity"
         android:paddingTop="5dp"
+        android:textColor="@color/light_text"
         android:paddingEnd="5dp"
         android:paddingBottom="5dp"
-        android:text="Activity"
-        android:textColor="@color/light_text"
         android:textSize="13sp"
         />
 
     <TextView
-        android:id="@+id/sort_votes"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1.7"
         android:background="@drawable/text_lines"
+        android:id="@+id/sort_votes"
         android:gravity="center"
-        android:paddingStart="5dp"
         android:paddingTop="5dp"
-        android:paddingEnd="5dp"
-        android:paddingBottom="5dp"
         android:text="Votes"
         android:textColor="@color/light_text"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:paddingBottom="5dp"
         android:textSize="13sp"
         />
     <TextView
-        android:id="@+id/sort_creation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:background="@drawable/text_lines"
+        android:id="@+id/sort_creation"
         android:gravity="center"
         android:paddingStart="5dp"
+        android:text="Creation"
         android:paddingTop="5dp"
+        android:textColor="@color/light_text"
         android:paddingEnd="5dp"
         android:paddingBottom="5dp"
-        android:text="Creation"
-        android:textColor="@color/light_text"
         android:textSize="13sp"
         />
   </LinearLayout>
@@ -79,9 +79,9 @@
       >
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/nested_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/nested_scroll_view"
         android:background="#f1f5f7"
         >
       <androidx.recyclerview.widget.RecyclerView

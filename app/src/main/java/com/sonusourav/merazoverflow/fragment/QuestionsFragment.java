@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -48,8 +49,17 @@ public class QuestionsFragment extends Fragment {
   private List<Question> tempQuestionList = null;
   private int[] sortOrder = new int[] { 1, 1, 1, 1 };
   private TextView sortActivity, sortRelevance, sortVotes, sortCreation;
+  private StringBuilder lastQuestion = new StringBuilder();
 
   public QuestionsFragment() {
+    Log.d("Question", "reaching empty constructor");
+  }
+
+  public QuestionsFragment(Bundle bundle) {
+    if (bundle != null) {
+      lastQuestion.append(bundle.getString("question"));
+      Log.d("Question", "question from voice search= " + lastQuestion);
+    }
   }
 
   @Override
@@ -70,6 +80,12 @@ public class QuestionsFragment extends Fragment {
     sortCreation = view.findViewById(R.id.sort_creation);
 
     searchView = Objects.requireNonNull(getActivity()).findViewById(R.id.search_view);
+    EditText searchEditText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+    searchEditText.setTextColor(getResources().getColor(R.color.grey_200));
+    searchEditText.setHintTextColor(getResources().getColor(R.color.grey_200));
+    searchEditText.setTextSize(15);
+
+
     questionsList = new ArrayList<>();
     questionAdapter = new QuestionAdapter(getActivity(), questionsList);
     apiService = ApiClient.getClient().create(ApiInterface.class);
@@ -87,7 +103,15 @@ public class QuestionsFragment extends Fragment {
     initSortListener(sortVotes);
     initSortListener(sortRelevance);
 
-    fetchQuestion(1);
+    if (!lastQuestion.toString().isEmpty()) {
+      questionAdapter.clear();
+      questionAdapter.addLoading();
+      searchQuestion(lastQuestion.toString());
+      searchView.setQuery(lastQuestion.toString(), false);
+    } else {
+      fetchQuestion(1);
+    }
+
     swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
       @Override
       public void onRefresh() {
@@ -119,6 +143,7 @@ public class QuestionsFragment extends Fragment {
   }
 
   private void fetchQuestion(final int pageNo) {
+    Log.d("Questions", "reaching onFetch");
 
     Call<ApiResponse> call = apiService.getQuestions(pageNo);
     call.enqueue(new Callback<ApiResponse>() {
@@ -168,12 +193,14 @@ public class QuestionsFragment extends Fragment {
         swipeRefresh.setEnabled(true);
         questionAdapter.removeLoading();
         questionAdapter.setSearchEnabled(true);
+        questionAdapter.clear();
 
         if (response.body() != null && response.body().getQuestions().length > 0) {
           questionAdapter.addItems(Arrays.asList(response.body().getQuestions()));
+          updateSortingBar(sortRelevance, 0);
         } else {
-          Toast.makeText(getActivity(), "No answers found", Toast.LENGTH_SHORT).show();
-          questionAdapter.addItems(tempQuestionList);
+          clearSortUI();
+          Toast.makeText(getActivity(), "No results found", Toast.LENGTH_SHORT).show();
         }
       }
 
@@ -256,14 +283,7 @@ public class QuestionsFragment extends Fragment {
 
   private void updateSortingBar(TextView textView, int number) {
     Log.d("Questions", number + "");
-    sortRelevance.setTextColor(getActivity().getResources().getColor(R.color.light_text));
-    sortActivity.setTextColor(getActivity().getResources().getColor(R.color.light_text));
-    sortVotes.setTextColor(getActivity().getResources().getColor(R.color.light_text));
-    sortCreation.setTextColor(getActivity().getResources().getColor(R.color.light_text));
-    sortRelevance.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-    sortActivity.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-    sortVotes.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-    sortCreation.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+    clearSortUI();
 
     textView.setTextColor(getActivity().getResources().getColor(R.color.sky_blue));
     Drawable drawable = null;
@@ -280,6 +300,17 @@ public class QuestionsFragment extends Fragment {
           getActivity().getResources().getColor(R.color.sky_blue));
     }
     textView.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
+  }
+
+  public void clearSortUI() {
+    sortRelevance.setTextColor(getActivity().getResources().getColor(R.color.light_text));
+    sortActivity.setTextColor(getActivity().getResources().getColor(R.color.light_text));
+    sortVotes.setTextColor(getActivity().getResources().getColor(R.color.light_text));
+    sortCreation.setTextColor(getActivity().getResources().getColor(R.color.light_text));
+    sortRelevance.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+    sortActivity.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+    sortVotes.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+    sortCreation.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
   }
 
   private void initScrollListener(LinearLayoutManager layoutManager) {
