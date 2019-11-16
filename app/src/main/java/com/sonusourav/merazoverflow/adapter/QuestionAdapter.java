@@ -91,7 +91,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
       });
 
-      for (int i = 0; i < 2; i++) {
+      int min = Math.min(2, question.getTags().length);
+      for (int i = 0; i < min; i++) {
         Chip tag = new Chip(context);
         tag.setText(question.getTags()[i]);
         myViewHolder.tagView.addView(tag);

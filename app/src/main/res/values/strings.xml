@@ -9,4 +9,16 @@
   <string name="speech_not_supported">Sorry! Your device doesn\'t support speech input</string>
   <string name="tap_on_mic">Tap on mic to speak</string>
   <string name="search_hint">Listening...</string>
+  <string name="title_activity_welcome">Home Screen</string>
+  <string name="next">NEXT</string>
+  <string name="skip">SKIP</string>
+  <string name="start">GOT IT</string>
+  <string name="slide_1_title">Search Bar</string>
+  <string name="slide_1_desc">Get search results instantly</string>
+  <string name="slide_2_title">Voice Search</string>
+  <string name="slide_2_desc">Use your voice to ask questions </string>
+  <string name="slide_3_title">Image search</string>
+  <string name="slide_3_desc">Hover your camera over your question to ask</string>
+  <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+  <string name="play_again">Play Again</string>
 </resources>

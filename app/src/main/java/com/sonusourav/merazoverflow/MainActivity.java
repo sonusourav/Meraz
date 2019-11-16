@@ -21,7 +21,6 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.sonusourav.merazoverflow.fragment.ProfileFragment;
 import com.sonusourav.merazoverflow.fragment.QuestionsFragment;
 import com.sonusourav.merazoverflow.fragment.UsersFragment;
 import com.sonusourav.merazoverflow.helper.BottomNavigationBehavior;
@@ -49,13 +48,8 @@ public class MainActivity extends AppCompatActivity {
           loadFragment(fragment);
           return true;
         case R.id.navigation_users:
-          toolbar.setTitle("Users");
+          toolbar.setTitle("Camera");
           fragment = new UsersFragment();
-          loadFragment(fragment);
-          return true;
-        case R.id.navigation_profile:
-          toolbar.setTitle("Profile");
-          fragment = new ProfileFragment();
           loadFragment(fragment);
           return true;
       }
