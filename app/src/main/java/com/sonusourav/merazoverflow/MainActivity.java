@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
@@ -20,7 +21,6 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.sonusourav.merazoverflow.fragment.ProfileFragment;
 import com.sonusourav.merazoverflow.fragment.QuestionsFragment;
 import com.sonusourav.merazoverflow.fragment.UsersFragment;
@@ -86,7 +86,8 @@ public class MainActivity extends AppCompatActivity {
 
     toolbar.setTitle("Questions");
 
-    if (!checkPermission()) {
+    Log.d("Questions", checkPermission() + "");
+    if (checkPermission()) {
       loadFragment(new QuestionsFragment());
     } else {
       requestPermission();
@@ -141,13 +142,13 @@ public class MainActivity extends AppCompatActivity {
         boolean audioAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
         boolean cameraAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
 
-        if (audioAccepted && cameraAccepted)
-          Snackbar.make(coordinatorLayout, "Permission granted for voice and image search",
-              Snackbar.LENGTH_LONG).show();
-        else {
-
-          Snackbar.make(coordinatorLayout, "Permission Denied. You cannot access mic",
-              Snackbar.LENGTH_LONG).show();
+        if (audioAccepted && cameraAccepted) {
+          Toast.makeText(getApplicationContext(), "Permission granted",
+              Toast.LENGTH_SHORT).show();
+          loadFragment(new QuestionsFragment());
+        } else {
+          Toast.makeText(getApplicationContext(), "Permission Denied",
+              Toast.LENGTH_SHORT).show();
 
           if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (shouldShowRequestPermissionRationale(RECORD_AUDIO)) {
